@@ -9,37 +9,37 @@
     --bg-primary: #000000;
     --bg-secondary: #0a0a0f;
     --bg-tertiary: #111118;
-    
+
     --accent-purple: #8B5CF6;
     --accent-purple-light: #A78BFA;
     --accent-purple-dark: #7C3AED;
     --accent-blue: #3B82F6;
     --accent-blue-light: #60A5FA;
     --accent-cyan: #06B6D4;
-    
+
     --text-primary: #FFFFFF;
     --text-secondary: #A0A0B0;
     --text-muted: #6B7280;
-    
+
     --gradient-primary: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
     --gradient-glow: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%);
-    
+
     /* Glass Effect */
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-blur: 20px;
-    
+
     /* Shadows */
     --glow-purple: 0 0 30px rgba(139, 92, 246, 0.3);
     --glow-blue: 0 0 30px rgba(59, 130, 246, 0.3);
-    
+
     /* Typography */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    
+
     /* Spacing */
     --section-padding: 100px 0;
     --container-max: 1200px;
-    
+
     /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
@@ -47,7 +47,9 @@
 }
 
 /* Reset & Base Styles */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -308,11 +310,64 @@ img {
     padding: 120px 24px 80px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+}
+
+.hero-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    max-width: var(--container-max);
+    width: 100%;
 }
 
 .hero-content {
-    text-align: center;
-    max-width: 800px;
+    text-align: left;
+    max-width: 600px;
+    flex: 1;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-image-frame {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    padding: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+}
+
+.hero-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--accent-purple);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-image-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+    z-index: 1;
+    filter: blur(40px);
+    animation: pulse 3s infinite;
 }
 
 .hero-badge {
@@ -338,8 +393,17 @@ img {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.2); }
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+    }
 }
 
 .hero-title {
@@ -385,7 +449,7 @@ img {
 .hero-buttons {
     display: flex;
     gap: 16px;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-bottom: 60px;
     animation: fadeInUp 0.8s ease 0.4s both;
@@ -394,12 +458,12 @@ img {
 .hero-stats {
     display: flex;
     gap: 48px;
-    justify-content: center;
+    justify-content: flex-start;
     animation: fadeInUp 0.8s ease 0.5s both;
 }
 
 .stat {
-    text-align: center;
+    text-align: left;
 }
 
 .stat-number {
@@ -448,9 +512,20 @@ img {
 }
 
 @keyframes scroll {
-    0% { transform: translateY(0); opacity: 1; }
-    50% { transform: translateY(8px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(8px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .scroll-indicator span {
@@ -497,6 +572,20 @@ img {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.profile-image:hover {
+    transform: scale(1.02);
+    box-shadow: var(--glow-purple);
 }
 
 .frame-decoration {
@@ -1155,8 +1244,13 @@ img {
    ===================================================== */
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeInUp {
@@ -1164,6 +1258,7 @@ img {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1186,23 +1281,46 @@ img {
    ===================================================== */
 
 @media (max-width: 1024px) {
+    .hero-wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .stat {
+        text-align: center;
+    }
+
     .about-grid {
         grid-template-columns: 1fr;
         gap: 40px;
     }
-    
+
     .about-image {
         order: -1;
     }
-    
+
     .skill-card.wide {
         grid-column: span 1;
     }
-    
+
     .contact-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-info {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1212,7 +1330,7 @@ img {
     :root {
         --section-padding: 60px 0;
     }
-    
+
     .nav-menu {
         position: fixed;
         top: 0;
@@ -1226,74 +1344,74 @@ img {
         gap: 24px;
         transition: right var(--transition-normal);
     }
-    
+
     .nav-menu.active {
         right: 0;
     }
-    
+
     .nav-link {
         font-size: 1.25rem;
         padding: 16px 32px;
     }
-    
+
     .nav-toggle {
         display: flex;
         z-index: 1001;
     }
-    
+
     .nav-toggle.active .hamburger {
         background: transparent;
     }
-    
+
     .nav-toggle.active .hamburger::before {
         transform: rotate(45deg);
         top: 0;
     }
-    
+
     .nav-toggle.active .hamburger::after {
         transform: rotate(-45deg);
         top: 0;
     }
-    
+
     .hero-stats {
         gap: 32px;
     }
-    
+
     .stat-number {
         font-size: 2rem;
     }
-    
+
     .contact-info {
         grid-template-columns: 1fr;
     }
-    
+
     .timeline-item {
         flex-direction: column;
         gap: 20px;
     }
-    
+
     .experience-header {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .experience-duration {
         width: 100%;
         justify-content: center;
     }
-    
+
     .projects-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .skills-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .soft-skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -1301,34 +1419,39 @@ img {
 }
 
 @media (max-width: 480px) {
+    .hero-image-frame {
+        width: 280px;
+        height: 280px;
+    }
+
     .hero-buttons {
         flex-direction: column;
         width: 100%;
     }
-    
+
     .btn {
         width: 100%;
         justify-content: center;
     }
-    
+
     .hero-stats {
         flex-direction: column;
         gap: 24px;
     }
-    
+
     .about-highlights {
         flex-direction: column;
     }
-    
+
     .highlight-item {
         width: 100%;
         justify-content: center;
     }
-    
+
     .soft-skills-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .timeline-details {
         flex-direction: column;
         gap: 16px;
